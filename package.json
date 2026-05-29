@@ -1,0 +1,18 @@
+{
+  "name": "financial-three-statements-analyzer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --no-warnings server/server.js",
+    "dev": "node --no-warnings server/server.js",
+    "check": "node --check server/server.js && node --check server/db.js && node --check server/pdfParser.js && node --check server/metricRegistry.js && node --check app.js && node --check sw.js",
+    "test:metrics": "node tests/metricRegistry.test.mjs",
+    "test:e2e": "node tests/e2e-analysis-flow.mjs",
+    "test:parser-samples": "node tests/parser-sample-set.mjs"
+  },
+  "dependencies": {
+    "pdfjs-dist": "^5.7.284",
+    "pdfkit": "^0.18.0"
+  }
+}

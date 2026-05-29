@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#f3f0f2",
+                        "surface-container-low": "#f5f3f4",
+                        "primary-container": "#1e293b",
+                        "error": "#ba1a1a",
+                        "outline": "#75777d",
+                        "surface-tint": "#545f73",
+                        "on-tertiary-container": "#a38c6a",
+                        "on-secondary-container": "#fefcff",
+                        "outline-variant": "#c5c6cd",
+                        "on-secondary-fixed": "#001a42",
+                        "surface-variant": "#e4e2e3",
+                        "on-tertiary-fixed-variant": "#564427",
+                        "on-secondary-fixed-variant": "#004395",
+                        "on-surface-variant": "#45474c",
+                        "surface-bright": "#fbf8fa",
+                        "surface": "#fbf8fa",
+                        "error-container": "#ffdad6",
+                        "primary": "#091426",
+                        "secondary-container": "#2170e4",
+                        "primary-fixed-dim": "#bcc7de",
+                        "surface-dim": "#dcd9db",
+                        "on-surface": "#1b1b1d",
+                        "on-primary-container": "#8590a6",
+                        "on-primary-fixed-variant": "#3c475a",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#271902",
+                        "on-error": "#ffffff",
+                        "secondary": "#0058be",
+                        "tertiary": "#1e1200",
+                        "inverse-primary": "#bcc7de",
+                        "secondary-fixed": "#d8e2ff",
+                        "tertiary-fixed": "#fadfb8",
+                        "tertiary-container": "#35260c",
+                        "surface-container-high": "#eae7e9",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "surface-container": "#f0edef",
+                        "primary-fixed": "#d8e3fb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "background": "#fbf8fa",
+                        "on-background": "#1b1b1d",
+                        "inverse-surface": "#303032",
+                        "on-primary-fixed": "#111c2d",
+                        "surface-container-highest": "#e4e2e3",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#ddc39d",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sm": "16px",
+                        "xs": "8px",
+                        "lg": "32px",
+                        "md": "24px",
+                        "gutter": "24px",
+                        "base": "4px",
+                        "xl": "48px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "title-sm": ["IBM Plex Sans"],
+                        "data-tabular": ["JetBrains Mono"],
+                        "display-lg": ["IBM Plex Sans"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["IBM Plex Sans"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "title-sm": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "data-tabular": ["13px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "display-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #F8FAFC;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar - JSON Command Execution -->
+<aside class="flex flex-col h-full py-lg bg-surface-container-low dark:bg-primary-container border-r border-outline-variant dark:border-outline w-60 shrink-0">
+<div class="px-sm mb-xl">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary-container">Admin Console</h1>
+<p class="font-title-sm text-title-sm text-on-surface-variant opacity-70">System Administration</p>
+</div>
+<nav class="flex-1 px-xs space-y-base">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-on-surface-variant px-sm py-xs hover:bg-surface-container-high dark:hover:bg-on-primary-fixed-variant transition-all duration-200 active:scale-95 origin-left" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-xl px-sm py-xs active:scale-95 origin-left" href="#">
+<span class="material-symbols-outlined">business</span>
+<span class="font-body-md text-body-md">Entities</span>
+</a>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-on-surface-variant px-sm py-xs hover:bg-surface-container-high dark:hover:bg-on-primary-fixed-variant transition-all duration-200 active:scale-95 origin-left" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-body-md text-body-md">Fiscal Years</span>
+</a>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-on-surface-variant px-sm py-xs hover:bg-surface-container-high dark:hover:bg-on-primary-fixed-variant transition-all duration-200 active:scale-95 origin-left" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md text-body-md">User Management</span>
+</a>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-on-surface-variant px-sm py-xs hover:bg-surface-container-high dark:hover:bg-on-primary-fixed-variant transition-all duration-200 active:scale-95 origin-left" href="#">
+<span class="material-symbols-outlined">history_edu</span>
+<span class="font-body-md text-body-md">Audit Logs</span>
+</a>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-on-surface-variant px-sm py-xs hover:bg-surface-container-high dark:hover:bg-on-primary-fixed-variant transition-all duration-200 active:scale-95 origin-left" href="#">
+<span class="material-symbols-outlined">settings_applications</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</nav>
+<div class="px-xs pt-lg border-t border-outline-variant/30 space-y-base">
+<a class="flex items-center gap-sm text-on-surface-variant px-sm py-xs hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md text-body-md">Help Center</span>
+</a>
+<a class="flex items-center gap-sm text-on-surface-variant px-sm py-xs hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md text-body-md">Log Out</span>
+</a>
+</div>
+</aside>
+<main class="flex-1 flex flex-col overflow-y-auto">
+<!-- TopNavBar - JSON Command Execution -->
+<header class="bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline sticky top-0 z-10 h-16 shrink-0">
+<div class="flex justify-between items-center w-full px-lg max-w-container-max mx-auto h-full">
+<div class="flex items-center gap-md">
+<span class="font-title-sm text-title-sm font-bold text-primary dark:text-on-primary-fixed">财务三表分析器</span>
+<nav class="hidden md:flex items-center gap-md ml-lg">
+<a class="text-on-surface-variant dark:text-on-surface-variant pb-1 hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 cursor-pointer active:opacity-70 font-body-md text-body-md" href="#">Home</a>
+<a class="text-secondary dark:text-secondary-fixed-dim border-b-2 border-secondary font-bold pb-1 cursor-pointer active:opacity-70 font-body-md text-body-md" href="#">Analyzer</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant pb-1 hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 cursor-pointer active:opacity-70 font-body-md text-body-md" href="#">Reports</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant pb-1 hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 cursor-pointer active:opacity-70 font-body-md text-body-md" href="#">History</a>
+</nav>
+</div>
+<div class="flex items-center gap-sm">
+<span class="text-label-caps font-label-caps bg-secondary-fixed text-on-secondary-fixed px-xs py-1 rounded-full">Pro Active until 2025</span>
+<div class="flex gap-xs ml-sm">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">settings</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="flex-1 w-full max-w-container-max mx-auto px-lg py-lg">
+<!-- Step Indicator -->
+<div class="mb-xl">
+<div class="flex items-center justify-between relative max-w-4xl mx-auto">
+<!-- Connecting Line -->
+<div class="absolute top-1/2 left-0 w-full h-[2px] bg-outline-variant -translate-y-1/2 z-0"></div>
+<div class="absolute top-1/2 left-0 w-1/4 h-[2px] bg-secondary -translate-y-1/2 z-0"></div>
+<!-- Step 1 -->
+<div class="relative z-10 flex flex-col items-center gap-xs">
+<div class="w-10 h-10 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold text-body-md">1</div>
+<span class="text-label-caps font-label-caps text-secondary">基础信息</span>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center gap-xs">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border-2 border-outline-variant text-on-surface-variant flex items-center justify-center font-bold text-body-md">2</div>
+<span class="text-label-caps font-label-caps text-on-surface-variant">数据上传</span>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center gap-xs">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border-2 border-outline-variant text-on-surface-variant flex items-center justify-center font-bold text-body-md">3</div>
+<span class="text-label-caps font-label-caps text-on-surface-variant">科目映射</span>
+</div>
+<!-- Step 4 -->
+<div class="relative z-10 flex flex-col items-center gap-xs">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border-2 border-outline-variant text-on-surface-variant flex items-center justify-center font-bold text-body-md">4</div>
+<span class="text-label-caps font-label-caps text-on-surface-variant">规则校验</span>
+</div>
+<!-- Step 5 -->
+<div class="relative z-10 flex flex-col items-center gap-xs">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border-2 border-outline-variant text-on-surface-variant flex items-center justify-center font-bold text-body-md">5</div>
+<span class="text-label-caps font-label-caps text-on-surface-variant">生成报告</span>
+</div>
+</div>
+</div>
+<!-- Analysis Form Section -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Left: Hero Imagery / Intro -->
+<div class="col-span-12 lg:col-span-4 h-full min-h-[400px] rounded-xl overflow-hidden relative">
+<img alt="Financial data concept" class="absolute inset-0 w-full h-full object-cover" data-alt="A macro photograph of professional financial documents and a sleek silver laptop on a minimalist white desk. Soft morning sunlight streams across the scene, highlighting sharp textures and clean lines. The atmosphere is quiet, studious, and highly professional, reflecting a high-stakes financial analysis environment with a palette of soft greys, whites, and deep navy accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2LwU_Hej-t0-JLM2Gdj2yHSGGd6z1Y5wqHa5fRXiZzYnjVX_MDVKJXRPsTwfvrP8yxFXT38yM6HTWv1h3yhUC3SN9hz0OaM7Ao9OdAkPZDCbLqbc9t7ZDHs64IIQr-cmsbt3ySzWmP4IyM6j_k3Xa4qMdXzuZGpp4D4jRanNzsWk7MVy1Ut54AbWJq6Vh6YFabSVt_4ZKEPn4357WWdBcZJYjMWtgbLPN5tWihKNo9EOvDI4kkBZH-mJgdj2hWamOqU8ACdI8fn8"/>
+<div class="absolute inset-0 bg-primary/40 backdrop-blur-[2px] flex flex-col justify-end p-lg">
+<h2 class="text-on-primary font-headline-md text-headline-md mb-xs">分析配置</h2>
+<p class="text-on-primary/80 font-body-md text-body-md">请准确选择您的分析维度与财务标准，这将直接影响后续智能对标算法的精准度。</p>
+</div>
+</div>
+<!-- Right: Form Fields -->
+<div class="col-span-12 lg:col-span-8">
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant/50 shadow-sm">
+<form class="space-y-lg">
+<!-- Analysis Type -->
+<div>
+<label class="block text-label-caps font-label-caps text-on-surface-variant mb-sm">分析类型 (ANALYSIS TYPE)</label>
+<div class="grid grid-cols-2 gap-sm">
+<label class="relative flex items-center p-md border-2 border-secondary bg-secondary/5 rounded-xl cursor-pointer group">
+<input checked="" class="hidden" name="analysis_type" type="radio"/>
+<div class="flex flex-col gap-xs">
+<span class="font-title-sm text-title-sm text-primary">单期深度分析</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">针对单一会计期间的财务状况进行全维度透视</span>
+</div>
+<span class="material-symbols-outlined ml-auto text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</label>
+<label class="relative flex items-center p-md border border-outline-variant hover:border-secondary transition-colors rounded-xl cursor-pointer group">
+<input class="hidden" name="analysis_type" type="radio"/>
+<div class="flex flex-col gap-xs">
+<span class="font-title-sm text-title-sm text-primary">跨期对标分析</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">多期间数据对比，追踪财务指标的增长与变动趋势</span>
+</div>
+<span class="material-symbols-outlined ml-auto text-outline-variant group-hover:text-secondary">radio_button_unchecked</span>
+</label>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-gutter">
+<!-- Report Language -->
+<div class="space-y-xs">
+<label class="block text-label-caps font-label-caps text-on-surface-variant">报告语言 (LANGUAGE)</label>
+<div class="relative">
+<select class="w-full h-12 bg-surface-container-lowest border border-outline-variant rounded-lg px-sm focus:ring-2 focus:ring-secondary/20 focus:border-secondary appearance-none">
+<option>中文简体 (Simplified Chinese)</option>
+<option>English (International)</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<!-- Accounting Standard -->
+<div class="space-y-xs">
+<label class="block text-label-caps font-label-caps text-on-surface-variant">会计准则 (STANDARD)</label>
+<div class="relative">
+<select class="w-full h-12 bg-surface-container-lowest border border-outline-variant rounded-lg px-sm focus:ring-2 focus:ring-secondary/20 focus:border-secondary appearance-none">
+<option>CAS (中国会计准则)</option>
+<option>IFRS (国际财务报告准则)</option>
+<option>US GAAP (美国公认会计原则)</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Industry Selection -->
+<div class="space-y-xs">
+<label class="block text-label-caps font-label-caps text-on-surface-variant">所属行业 (INDUSTRY SECTOR)</label>
+<div class="grid grid-cols-3 gap-sm">
+<select class="col-span-3 w-full h-12 bg-surface-container-lowest border border-outline-variant rounded-lg px-sm focus:ring-2 focus:ring-secondary/20 focus:border-secondary appearance-none">
+<option>Manufacturing - 制造业</option>
+<option>Retail &amp; Consumer - 零售与消费</option>
+<option>Technology &amp; Software - 科技与软件</option>
+<option>Real Estate - 房地产</option>
+<option>Healthcare - 医疗保健</option>
+<option>Financial Services - 金融服务</option>
+<option>Energy &amp; Utilities - 能源与公用事业</option>
+<option>Transportation - 交通运输</option>
+<option>Hospitality &amp; Leisure - 餐饮旅游</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-gutter">
+<!-- Currency -->
+<div class="space-y-xs">
+<label class="block text-label-caps font-label-caps text-on-surface-variant">本位币 (CURRENCY)</label>
+<div class="flex items-center h-12 px-sm border border-outline-variant rounded-lg bg-surface-container-low/50">
+<span class="font-body-md text-body-md flex-1">人民币 (CNY)</span>
+<button class="text-secondary font-label-caps text-label-caps hover:underline" type="button">修改</button>
+</div>
+</div>
+<!-- Unit -->
+<div class="space-y-xs">
+<label class="block text-label-caps font-label-caps text-on-surface-variant">报告数值单位 (UNIT)</label>
+<div class="flex items-center h-12 px-sm border border-outline-variant rounded-lg bg-surface-container-low/50">
+<span class="font-body-md text-body-md flex-1">元 (Yuan)</span>
+<button class="text-secondary font-label-caps text-label-caps hover:underline" type="button">修改</button>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="pt-lg flex items-center justify-between border-t border-outline-variant/30 mt-xl">
+<button class="px-lg h-12 border border-outline text-on-surface-variant font-label-caps text-label-caps rounded-lg hover:bg-surface-container transition-colors" type="button">
+                                        取消并保存草稿
+                                    </button>
+<div class="flex gap-sm">
+<button class="px-xl h-12 bg-primary text-on-primary font-title-sm text-title-sm rounded-lg flex items-center gap-sm hover:bg-primary-container transition-shadow shadow-md" type="submit">
+                                            下一步
+                                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+<!-- Guidance Info Cards (Asymmetric Layout) -->
+<div class="mt-xl grid grid-cols-12 gap-gutter">
+<div class="col-span-12 md:col-span-8 bg-tertiary-fixed text-on-tertiary-fixed p-md rounded-xl flex items-start gap-md">
+<span class="material-symbols-outlined text-tertiary p-xs bg-tertiary-container/10 rounded-lg">info</span>
+<div>
+<h3 class="font-title-sm text-title-sm mb-xs">行业基准值说明</h3>
+<p class="font-body-sm text-body-sm opacity-80">
+                                选择特定的行业（如“制造业”）后，系统将自动加载2023-2024年度同行业A股上市公司的关键财务指标中值，用于您的资产回报率及周转率对标分析。
+                            </p>
+</div>
+</div>
+<div class="col-span-12 md:col-span-4 border border-outline-variant p-md rounded-xl">
+<div class="flex items-center gap-xs mb-xs">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">智能校验开启</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">系统已针对 CAS 准则下的最新勾稽关系规则库进行预热。</p>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

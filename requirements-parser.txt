@@ -1,0 +1,5 @@
+pdfplumber>=0.11.0
+camelot-py>=1.0.0
+docling>=2.70.0
+pytesseract>=0.3.13
+Pillow>=10.0.0

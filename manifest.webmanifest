@@ -1,0 +1,23 @@
+{
+  "name": "财务三表分析器",
+  "short_name": "三表分析器",
+  "description": "面向非财务用户的资产负债表、损益表、现金流量表分析 PWA。",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fbf8fa",
+  "theme_color": "#091426",
+  "icons": [
+    {
+      "src": "./icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

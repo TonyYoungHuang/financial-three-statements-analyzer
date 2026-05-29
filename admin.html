@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#091426" />
+    <title>财务三表分析器后台</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css?v=11" />
+  </head>
+  <body>
+    <div id="app">
+      <section class="shell" data-admin-shell>
+        <aside class="sidebar">
+          <div class="sidebar-brand">
+            <div class="brand-mark small">
+              <span class="material-symbols-outlined">admin_panel_settings</span>
+            </div>
+            <div>
+              <strong>后台管理</strong>
+              <small>Server Admin Console</small>
+            </div>
+          </div>
+
+          <nav class="side-nav" aria-label="后台导航">
+            <button class="nav-item active" type="button">
+              <span class="material-symbols-outlined">vpn_key</span>
+              激活码与配置
+            </button>
+            <a class="nav-item" href="./index.html">
+              <span class="material-symbols-outlined">open_in_new</span>
+              打开前台
+            </a>
+          </nav>
+
+          <div class="sidebar-note">
+            <p class="eyebrow">部署提醒</p>
+            <strong>后台不发给客户</strong>
+            <span>正式上线时请用独立入口和服务器访问控制保护本页。</span>
+          </div>
+        </aside>
+
+        <main class="workspace">
+          <header class="topbar">
+            <div>
+              <p class="eyebrow">Admin Console</p>
+              <h2>后台管理</h2>
+            </div>
+            <div class="topbar-actions">
+              <span class="status-chip info" data-admin-state>等待令牌</span>
+            </div>
+          </header>
+
+          <div class="grid-12">
+            <section class="module span-7">
+              <div class="module-title">
+                <div>
+                  <p class="eyebrow">Activation Codes</p>
+                  <h3>激活码管理</h3>
+                </div>
+              </div>
+
+              <div class="admin-token-row">
+                <div class="field">
+                  <label for="adminToken">管理员令牌</label>
+                  <input id="adminToken" value="dev-admin-token" autocomplete="off" />
+                </div>
+                <button class="btn primary" data-admin-load>
+                  <span class="material-symbols-outlined">lock_open</span>
+                  连接后台
+                </button>
+              </div>
+
+              <div class="notice warning-soft">
+                <span class="material-symbols-outlined">security</span>
+                <p>正式部署时请把管理员令牌改为服务器环境变量，并通过 Nginx、IP 白名单或独立登录保护后台入口。</p>
+              </div>
+
+              <div class="admin-create-grid">
+                <div class="field">
+                  <label for="newActivationCode">指定激活码，可留空</label>
+                  <input id="newActivationCode" placeholder="留空自动生成" />
+                </div>
+                <div class="field">
+                  <label for="newValidUntil">有效期</label>
+                  <input id="newValidUntil" type="date" value="2026-06-12" />
+                </div>
+                <div class="field">
+                  <label for="newMaxSessions">同时会话</label>
+                  <input id="newMaxSessions" type="number" min="1" max="20" value="2" />
+                </div>
+                <button class="btn primary" data-create-code>
+                  <span class="material-symbols-outlined">add</span>
+                  创建
+                </button>
+                <div class="field">
+                  <label for="bulkCount">批量数量</label>
+                  <input id="bulkCount" type="number" min="1" max="100" value="5" />
+                </div>
+                <div class="field">
+                  <label for="bulkPrefix">批量前缀</label>
+                  <input id="bulkPrefix" value="FIN" />
+                </div>
+                <button class="btn secondary" data-bulk-create>
+                  <span class="material-symbols-outlined">add_circle</span>
+                  批量生成
+                </button>
+              </div>
+
+              <div class="data-table-wrap">
+                <table class="data-table admin-table">
+                  <thead>
+                    <tr>
+                      <th>激活码</th>
+                      <th>状态</th>
+                      <th>有效期</th>
+                      <th>会话</th>
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  <tbody data-admin-code-rows>
+                    <tr><td colspan="5">输入管理员令牌后加载激活码。</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="module span-5">
+              <div class="module-title">
+                <div>
+                  <p class="eyebrow">Server Config</p>
+                  <h3>配置管理</h3>
+                </div>
+              </div>
+              <div class="config-list">
+                <button data-config-key="industry_benchmarks">
+                  <span class="material-symbols-outlined">analytics</span>
+                  <strong>行业基准</strong>
+                  <small>粗行业指标区间</small>
+                </button>
+                <button data-config-key="scoring_weights">
+                  <span class="material-symbols-outlined">tune</span>
+                  <strong>评分权重</strong>
+                  <small>盈利、现金流、偿债等权重</small>
+                </button>
+                <button data-config-key="ai_prompt">
+                  <span class="material-symbols-outlined">psychology</span>
+                  <strong>AI 提示词</strong>
+                  <small>报告生成与调分边界</small>
+                </button>
+                <button data-config-key="ai_settings">
+                  <span class="material-symbols-outlined">key</span>
+                  <strong>AI API</strong>
+                  <small>DeepSeek key, model, endpoint</small>
+                </button>
+                <button data-config-key="parser_settings">
+                  <span class="material-symbols-outlined">document_scanner</span>
+                  <strong>解析引擎</strong>
+                  <small>pdfjs, pdfplumber, Camelot, Docling</small>
+                </button>
+                <button data-config-key="disclaimer">
+                  <span class="material-symbols-outlined">policy</span>
+                  <strong>免责声明</strong>
+                  <small>报告和隐私页面文本</small>
+                </button>
+              </div>
+              <div class="config-editor">
+                <div class="module-title">
+                  <div>
+                    <p class="eyebrow" data-config-current-key>未选择</p>
+                    <h3>JSON 配置</h3>
+                  </div>
+                  <button class="ghost-button" data-save-config>
+                    <span class="material-symbols-outlined">save</span>
+                    保存
+                  </button>
+                </div>
+                <textarea data-config-editor spellcheck="false" placeholder="选择左侧配置项后编辑 JSON"></textarea>
+                <p class="field-hint" data-config-message>配置保存后会影响后续分析任务。</p>
+              </div>
+            </section>
+          </div>
+        </main>
+      </section>
+    </div>
+
+    <script src="./admin.js?v=2"></script>
+  </body>
+</html>

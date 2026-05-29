@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#091426" />
+    <title>财务三表分析器</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css?v=11" />
+  </head>
+  <body>
+    <div id="app">
+      <section class="auth-screen" data-screen="auth">
+        <div class="auth-panel">
+          <div class="brand-lockup">
+            <div class="brand-mark">
+              <span class="material-symbols-outlined">account_balance</span>
+            </div>
+            <div>
+              <p class="eyebrow">Financial Statement Analyzer</p>
+              <h1>财务三表分析器</h1>
+              <p class="muted">面向非财务用户的企业财务质量与风险分析 PWA</p>
+            </div>
+          </div>
+
+          <div class="module auth-card">
+            <div class="field">
+              <label for="activationCode">激活码</label>
+              <div class="input-with-icon">
+                <input id="activationCode" value="" autocomplete="off" />
+                <span class="material-symbols-outlined">vpn_key</span>
+              </div>
+              <p class="field-hint">进入系统前必须验证激活码。每个激活码最多允许 2 个同时在线会话。</p>
+            </div>
+            <button class="btn primary full" data-auth-submit>
+              验证并进入
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+            <div class="notice danger-soft hidden" data-auth-message>
+              <span class="material-symbols-outlined">error</span>
+              <div>
+                <strong>验证失败状态示例</strong>
+                <p>无效、已过期或同时在线会话超过限制时，系统会在这里给出明确原因。</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="auth-foot">
+            <button class="text-link" data-open-modal="privacy">隐私说明</button>
+            <span></span>
+            <button class="text-link">服务条款</button>
+            <span></span>
+            <button class="text-link">联系支持</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="shell hidden" data-shell>
+        <aside class="sidebar">
+          <div class="sidebar-brand">
+            <div class="brand-mark small">
+              <span class="material-symbols-outlined">account_balance</span>
+            </div>
+            <div>
+              <strong>财务三表分析器</strong>
+              <small>Investment Analysis PWA</small>
+            </div>
+          </div>
+
+          <nav class="side-nav" aria-label="主导航">
+            <button class="nav-item active" data-go="dashboard">
+              <span class="material-symbols-outlined">dashboard</span>
+              项目首页
+            </button>
+            <button class="nav-item" data-go="setup">
+              <span class="material-symbols-outlined">add_chart</span>
+              新建分析
+            </button>
+            <button class="nav-item" data-go="result">
+              <span class="material-symbols-outlined">monitoring</span>
+              分析结果
+            </button>
+          </nav>
+
+          <div class="sidebar-note">
+            <p class="eyebrow">授权状态</p>
+            <strong data-auth-status>专业版已激活</strong>
+            <span data-auth-valid-until>有效期至 2026-06-12</span>
+          </div>
+        </aside>
+
+        <main class="workspace">
+          <header class="topbar">
+            <div>
+              <p class="eyebrow" data-page-kicker>Workspace</p>
+              <h2 data-page-title>项目首页</h2>
+            </div>
+            <div class="topbar-actions">
+              <button class="ghost-button" data-open-modal="privacy">
+                <span class="material-symbols-outlined">shield_lock</span>
+                隐私说明
+              </button>
+              <span class="status-chip success" data-session-status>2 会话内</span>
+            </div>
+          </header>
+
+          <div class="screen active" data-screen="dashboard">
+            <section class="hero-band">
+              <div>
+                <p class="eyebrow">财务质量判断</p>
+                <h1>上传财务三表，生成可解释的投资分析报告</h1>
+                <p>
+                  系统聚焦盈利质量、现金流质量和主要财务风险，帮助非财务用户判断公司是否值得进一步研究。
+                </p>
+              </div>
+              <button class="btn secondary" data-go="setup">
+                <span class="material-symbols-outlined">upload_file</span>
+                新建分析
+              </button>
+            </section>
+
+            <div class="section-heading">
+              <div>
+                <h3>历史摘要</h3>
+                <p>项目摘要长期可见；原始 PDF 仅临时保留 1 天，生成后的 PDF 报告不做云端保存。</p>
+              </div>
+              <div class="button-row">
+                <button class="ghost-button">
+                  <span class="material-symbols-outlined">filter_list</span>
+                  筛选
+                </button>
+                <button class="ghost-button danger" data-clear-projects>
+                  <span class="material-symbols-outlined">delete_sweep</span>
+                  清空全部
+                </button>
+              </div>
+            </div>
+
+            <div class="project-grid" data-project-grid>
+              <article class="module project-card">
+                <div class="card-top">
+                  <div>
+                    <p class="eyebrow">互联网/软件</p>
+                    <h4>某科技股份有限公司</h4>
+                    <span class="muted">2025 年度 · CAS · CNY</span>
+                  </div>
+                  <div class="score-block good">
+                    <strong>82</strong>
+                    <span>A</span>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div class="risk-tags">
+                  <span class="tag warning">利润现金含量偏弱</span>
+                  <span class="tag info">收入增长稳健</span>
+                </div>
+                <div class="card-meta">
+                  <span>生成时间 2026-05-13 19:40</span>
+                  <button class="icon-button" aria-label="删除">
+                    <span class="material-symbols-outlined">delete</span>
+                  </button>
+                </div>
+              </article>
+
+              <article class="module project-card">
+                <div class="card-top">
+                  <div>
+                    <p class="eyebrow">制造业</p>
+                    <h4>全球制造贸易集团</h4>
+                    <span class="muted">2024 年度 · IFRS · USD</span>
+                  </div>
+                  <div class="score-block danger">
+                    <strong>47</strong>
+                    <span>C</span>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div class="risk-tags">
+                  <span class="tag danger">经营现金流为负</span>
+                  <span class="tag danger">毛利率下滑</span>
+                </div>
+                <div class="card-meta">
+                  <span>生成时间 2026-05-12 14:22</span>
+                  <button class="icon-button" aria-label="删除">
+                    <span class="material-symbols-outlined">delete</span>
+                  </button>
+                </div>
+              </article>
+
+              <article class="module project-card empty-card">
+                <span class="material-symbols-outlined">note_add</span>
+                <h4>创建新的分析项目</h4>
+                <p>支持单期和两期对比，报告生成后请及时下载 PDF。</p>
+                <button class="btn primary" data-go="setup">开始</button>
+              </article>
+            </div>
+          </div>
+
+          <div class="screen" data-screen="setup">
+            <div class="stepper" aria-label="分析流程">
+              <div class="step done"><span>1</span><strong>基础信息</strong></div>
+              <div class="step active"><span>2</span><strong>上传三表</strong></div>
+              <div class="step"><span>3</span><strong>确认数据</strong></div>
+              <div class="step"><span>4</span><strong>生成分析</strong></div>
+              <div class="step"><span>5</span><strong>导出 PDF</strong></div>
+            </div>
+
+            <div class="grid-12">
+              <section class="module form-panel span-7">
+                <div class="module-title">
+                  <div>
+                    <p class="eyebrow">Step 1</p>
+                    <h3>分析配置</h3>
+                  </div>
+                  <span class="status-chip info">自动识别币种和单位</span>
+                </div>
+
+                <div class="segmented">
+                  <button type="button" class="selected" data-analysis-type="single">单期分析</button>
+                  <button type="button" data-analysis-type="two_period">两期对比</button>
+                </div>
+
+                <div class="form-grid">
+                  <div class="field">
+                    <label>报表语言</label>
+                    <select data-analysis-field="language">
+                      <option>中文</option>
+                      <option>英文</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label>会计准则</label>
+                    <select data-analysis-field="accountingStandard">
+                      <option value="CAS">中国企业会计准则 CAS</option>
+                      <option>IFRS</option>
+                    </select>
+                  </div>
+                  <div class="field wide">
+                    <label>粗行业</label>
+                    <select data-analysis-field="industry">
+                      <option>互联网/软件</option>
+                      <option>制造业</option>
+                      <option>零售业</option>
+                      <option>房地产</option>
+                      <option>金融</option>
+                      <option>建筑</option>
+                      <option>医药</option>
+                      <option>能源</option>
+                      <option>其他</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label>币种</label>
+                    <select data-analysis-field="currency">
+                      <option value="CNY">自动识别：CNY</option>
+                      <option>USD</option>
+                      <option>HKD</option>
+                      <option>EUR</option>
+                      <option>GBP</option>
+                      <option>JPY</option>
+                      <option>SGD</option>
+                      <option>AUD</option>
+                      <option>KRW</option>
+                      <option>TWD</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label>金额单位</label>
+                    <select data-analysis-field="amountUnit">
+                      <option value="万元">自动识别：万元</option>
+                      <option>元</option>
+                      <option>千元</option>
+                      <option>百万元</option>
+                    </select>
+                  </div>
+                </div>
+              </section>
+
+              <aside class="module insight-panel span-5">
+                <p class="eyebrow">识别范围</p>
+                <h3>支持电子 PDF 与基础扫描件解析</h3>
+                <p>
+                  系统可解析常见审计报告、年报中的资产负债表、损益表、现金流量表，也支持基础扫描件和影印 PDF 的识别。复杂扫描件可能需要进入数据确认页进行人工校对和手工修复。
+                </p>
+                <div class="notice info-soft">
+                  <span class="material-symbols-outlined">info</span>
+                  <p>如果识别不完整，仍可进入标准科目表手动补全。</p>
+                </div>
+              </aside>
+            </div>
+
+            <section class="module upload-panel">
+                <div class="module-title">
+                  <div>
+                    <p class="eyebrow">Step 2</p>
+                    <h3>上传三张财务报表 PDF</h3>
+                </div>
+                <button class="ghost-button">
+                  <span class="material-symbols-outlined">help</span>
+                  查看标准示例
+                </button>
+                </div>
+
+                <div class="notice info-soft" data-analysis-status>
+                  <span class="material-symbols-outlined">cloud_upload</span>
+                  <p>请选择三张财务报表 PDF。电子 PDF 会优先走表格抽取；基础扫描件会尝试 OCR 解析，复杂扫描件可在下一步人工校对。</p>
+                </div>
+
+              <div class="upload-grid">
+                <label class="upload-box" data-upload-box="balance_sheet" data-upload-period="current">
+                  <span class="material-symbols-outlined">balance</span>
+                  <strong>资产负债表 · 本期</strong>
+                  <small>拖拽 PDF 或点击选择</small>
+                  <input type="file" accept=".pdf,application/pdf" data-upload-file="balance_sheet" data-upload-period="current" />
+                </label>
+                <label class="upload-box" data-upload-box="income_statement" data-upload-period="current">
+                  <span class="material-symbols-outlined">request_quote</span>
+                  <strong>损益表 / 利润表 · 本期</strong>
+                  <small>拖拽 PDF 或点击选择</small>
+                  <input type="file" accept=".pdf,application/pdf" data-upload-file="income_statement" data-upload-period="current" />
+                </label>
+                <label class="upload-box" data-upload-box="cash_flow" data-upload-period="current">
+                  <span class="material-symbols-outlined">payments</span>
+                  <strong>现金流量表 · 本期</strong>
+                  <small>拖拽 PDF 或点击选择</small>
+                  <input type="file" accept=".pdf,application/pdf" data-upload-file="cash_flow" data-upload-period="current" />
+                </label>
+                <label class="upload-box hidden" data-upload-box="balance_sheet" data-upload-period="previous">
+                  <span class="material-symbols-outlined">balance</span>
+                  <strong>资产负债表 · 上期</strong>
+                  <small>两期对比时上传</small>
+                  <input type="file" accept=".pdf,application/pdf" data-upload-file="balance_sheet" data-upload-period="previous" />
+                </label>
+                <label class="upload-box hidden" data-upload-box="income_statement" data-upload-period="previous">
+                  <span class="material-symbols-outlined">request_quote</span>
+                  <strong>损益表 / 利润表 · 上期</strong>
+                  <small>两期对比时上传</small>
+                  <input type="file" accept=".pdf,application/pdf" data-upload-file="income_statement" data-upload-period="previous" />
+                </label>
+                <label class="upload-box hidden" data-upload-box="cash_flow" data-upload-period="previous">
+                  <span class="material-symbols-outlined">payments</span>
+                  <strong>现金流量表 · 上期</strong>
+                  <small>两期对比时上传</small>
+                  <input type="file" accept=".pdf,application/pdf" data-upload-file="cash_flow" data-upload-period="previous" />
+                </label>
+              </div>
+
+              <div class="actions-line">
+                <button class="ghost-button" data-go="dashboard">取消</button>
+                <button class="btn primary" data-start-analysis>
+                  进入数据确认
+                  <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+              </div>
+            </section>
+          </div>
+
+          <div class="screen" data-screen="confirm">
+            <div class="stepper compact">
+              <div class="step done"><span>1</span><strong>基础信息</strong></div>
+              <div class="step done"><span>2</span><strong>上传三表</strong></div>
+              <div class="step active"><span>3</span><strong>确认数据</strong></div>
+              <div class="step"><span>4</span><strong>生成分析</strong></div>
+              <div class="step"><span>5</span><strong>导出 PDF</strong></div>
+            </div>
+
+            <section class="module">
+                <div class="module-title">
+                  <div>
+                    <p class="eyebrow">Standardized Statements</p>
+                    <h3>标准科目数据确认</h3>
+                  </div>
+                  <div class="tab-buttons">
+                  <button class="selected" data-confirm-tab="balance_sheet">资产负债表</button>
+                  <button data-confirm-tab="income_statement">损益表</button>
+                  <button data-confirm-tab="cash_flow">现金流量表</button>
+                  </div>
+                </div>
+
+              <div class="notice info-soft" data-parse-status>
+                <span class="material-symbols-outlined">data_table</span>
+                <p>解析完成后，系统会按标准科目展示识别金额；未识别项目可在后续编辑阶段补录。</p>
+              </div>
+
+              <div class="data-table-wrap">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>标准科目</th>
+                      <th>本期金额</th>
+                      <th>上期金额</th>
+                      <th>识别状态</th>
+                      <th>说明</th>
+                    </tr>
+                  </thead>
+                  <tbody data-statement-rows>
+                    <tr><td colspan="5">上传并解析 PDF 后显示标准科目数据。</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <label class="confirm-row">
+                <input type="checkbox" checked data-confirm-checkbox />
+                <span>我确认以上数据已经检查，分析结果将以确认后的报表数据为准。</span>
+              </label>
+
+              <div class="actions-line">
+                <button class="ghost-button" data-go="setup">返回上传</button>
+                <button class="ghost-button" data-save-statements>
+                  <span class="material-symbols-outlined">save</span>
+                  保存数据
+                </button>
+                <button class="btn primary" data-confirm-statements>
+                  确认并锁定
+                  <span class="material-symbols-outlined">auto_awesome</span>
+                </button>
+              </div>
+            </section>
+          </div>
+
+          <div class="screen" data-screen="result">
+            <section class="score-hero module">
+              <div class="score-ring" data-result-ring>
+                <strong data-result-score>82</strong>
+                <span data-result-rating>Grade A</span>
+              </div>
+              <div class="score-copy">
+                <p class="eyebrow">综合结论</p>
+                <h3>值得进一步研究，但需重点核查利润现金含量</h3>
+                <p>
+                  公司盈利能力强于行业中位水平，收入增长较稳健。经营现金流对净利润的覆盖偏弱，建议继续核查回款质量、合同资产和应收账款账龄。
+                </p>
+                <div class="risk-tags" data-result-tags>
+                  <span class="tag success">盈利能力良好</span>
+                  <span class="tag warning">现金流质量需关注</span>
+                  <span class="tag info">模型调校 +6 分</span>
+                </div>
+              </div>
+              <button class="btn secondary" data-open-modal="export">
+                <span class="material-symbols-outlined">picture_as_pdf</span>
+                导出 PDF
+              </button>
+            </section>
+
+            <div class="grid-12">
+              <section class="module span-6">
+                <div class="module-title">
+                  <h3>盈利质量分析</h3>
+                  <span class="status-chip success">优先维度</span>
+                </div>
+                <p class="analysis-text">
+                  毛利率和净利率均高于行业基准，主营业务具备较好的利润空间。但净利润增速快于经营现金流增速，利润兑现质量需要结合回款和收入确认政策继续确认。
+                </p>
+              </section>
+              <section class="module span-6">
+                <div class="module-title">
+                  <h3>现金流质量分析</h3>
+                  <span class="status-chip warning">重点关注</span>
+                </div>
+                <p class="analysis-text">
+                  经营现金流净额为正，但经营现金流/净利润低于行业舒适区间。若下一期继续走低，可能说明利润中有较高比例尚未形成现金回款。
+                </p>
+              </section>
+            </div>
+
+            <section class="module" data-ai-analysis-card>
+              <div class="module-title">
+                <div>
+                  <p class="eyebrow">Report Notes</p>
+                  <h3>报告解读补充</h3>
+                </div>
+                <span class="status-chip info" data-ai-status>等待生成</span>
+              </div>
+              <p class="analysis-text" data-ai-summary>
+                本报告的自动化解读能力接入 DeepSeek V4 大模型，并结合专业财务分析人员的测试、校准与规则调整生成。报告内容仅基于用户上传并确认的财务报表数据、系统计算指标及风险识别规则，用于辅助理解企业财务状况、盈利质量、现金流表现和潜在风险，不构成投资建议、买卖建议、授信建议、审计意见或任何形式的决策结论。
+              </p>
+              <div class="ai-grid">
+                <p data-ai-profitability></p>
+                <p data-ai-cash-flow></p>
+                <p data-ai-period></p>
+              </div>
+              <ul class="risk-list compact" data-ai-suggestions></ul>
+              <div class="evidence-strip" data-ai-validation></div>
+              <div class="chart-strip" data-chart-data></div>
+            </section>
+
+            <div class="grid-12">
+              <section class="module span-7">
+                <div class="module-title">
+                  <h3>维度得分与权重</h3>
+                  <button class="text-link">查看评分规则</button>
+                </div>
+                <div class="score-list" data-dimension-scores>
+                  <div><span>盈利能力 · 30%</span><meter min="0" max="100" value="88"></meter><strong>88</strong></div>
+                  <div><span>现金流质量 · 30%</span><meter min="0" max="100" value="64"></meter><strong>64</strong></div>
+                  <div><span>偿债能力 · 15%</span><meter min="0" max="100" value="79"></meter><strong>79</strong></div>
+                  <div><span>运营效率 · 10%</span><meter min="0" max="100" value="73"></meter><strong>73</strong></div>
+                  <div><span>成长性/变化 · 10%</span><meter min="0" max="100" value="84"></meter><strong>84</strong></div>
+                  <div><span>财务结构 · 5%</span><meter min="0" max="100" value="76"></meter><strong>76</strong></div>
+                </div>
+              </section>
+              <aside class="module span-5">
+                <div class="module-title">
+                  <h3>主要风险清单</h3>
+                  <span class="status-chip danger">按严重程度</span>
+                </div>
+                <ol class="risk-list" data-risk-list>
+                  <li><strong>盈利质量风险</strong><span>净利润增长快于现金流增长。</span></li>
+                  <li><strong>现金流风险</strong><span>经营现金流覆盖净利润不足。</span></li>
+                  <li><strong>应收风险</strong><span>应收账款增速高于收入增速。</span></li>
+                  <li><strong>勾稽风险</strong><span>部分科目来自用户补全，需保留核查记录。</span></li>
+                </ol>
+              </aside>
+            </div>
+
+            <section class="module">
+              <div class="module-title">
+                <div>
+                  <p class="eyebrow">Period Comparison</p>
+                  <h3>两期核心科目对比</h3>
+                </div>
+                <span class="status-chip info">本期 / 上期 / 变动</span>
+              </div>
+              <div class="data-table-wrap">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>科目</th>
+                      <th>本期</th>
+                      <th>上期</th>
+                      <th>变动额</th>
+                      <th>变动率</th>
+                      <th>提示</th>
+                    </tr>
+                  </thead>
+                  <tbody data-period-comparison>
+                    <tr><td colspan="6">确认两期数据后展示核心科目变动。</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="module">
+              <div class="module-title">
+                <div>
+                  <p class="eyebrow">30+ Key Metrics</p>
+                  <h3>关键指标</h3>
+                </div>
+                <div class="segmented small">
+                  <button class="selected" data-mode="evaluate">评估模式</button>
+                  <button data-mode="learn">学习模式</button>
+                </div>
+              </div>
+              <div class="metrics-grid" data-metrics>
+                <article>
+                  <span>毛利率</span>
+                  <strong>42.8%</strong>
+                  <small>高于行业基准 35%</small>
+                  <p class="formula">公式：毛利 / 营业收入</p>
+                </article>
+                <article>
+                  <span>净利率</span>
+                  <strong>16.4%</strong>
+                  <small>盈利能力较强</small>
+                  <p class="formula">公式：净利润 / 营业收入</p>
+                </article>
+                <article>
+                  <span>经营现金流/净利润</span>
+                  <strong>0.72x</strong>
+                  <small>低于舒适区间</small>
+                  <p class="formula">公式：经营现金流净额 / 净利润</p>
+                </article>
+                <article>
+                  <span>资产负债率</span>
+                  <strong>43.6%</strong>
+                  <small>债务压力可控</small>
+                  <p class="formula">公式：负债合计 / 资产总计</p>
+                </article>
+                <article>
+                  <span>应收账款周转天数</span>
+                  <strong>86 天</strong>
+                  <small>需关注回款效率</small>
+                  <p class="formula">公式：365 / 应收账款周转率</p>
+                </article>
+                <article>
+                  <span>收入增长率</span>
+                  <strong>18.2%</strong>
+                  <small>成长性良好</small>
+                  <p class="formula">公式：本期收入 / 上期收入 - 1</p>
+                </article>
+              </div>
+            </section>
+
+            <section class="module disclaimer">
+              <span class="material-symbols-outlined">gavel</span>
+              <p>
+                本报告仅基于用户上传并确认的财务报表数据、系统计算指标及风险识别规则生成，用于辅助理解企业财务状况、盈利质量、现金流表现和潜在风险，不构成投资建议、买卖建议、授信建议、审计意见或任何形式的决策结论。
+              </p>
+            </section>
+          </div>
+
+        </main>
+      </section>
+    </div>
+
+    <dialog class="modal" data-modal="privacy">
+      <div class="modal-card">
+        <div class="module-title">
+          <h3>隐私说明</h3>
+          <button class="icon-button" data-close-modal aria-label="关闭">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="privacy-grid">
+          <div class="notice success-soft">
+            <span class="material-symbols-outlined">save</span>
+            <div>
+              <strong>系统保存</strong>
+              <p>历史项目摘要、评分、评级、主要风险和生成时间。</p>
+            </div>
+          </div>
+          <div class="notice danger-soft">
+            <span class="material-symbols-outlined">delete</span>
+            <div>
+              <strong>临时保留</strong>
+              <p>原始 PDF 仅用于解析和校对，服务器保留期限为 1 天，到期自动清理。</p>
+            </div>
+          </div>
+          <div class="notice info-soft">
+            <span class="material-symbols-outlined">cloud_upload</span>
+            <div>
+              <strong>发送给 AI</strong>
+              <p>结构化财务数据、关键指标、行业信息和分析上下文。</p>
+            </div>
+          </div>
+          <div class="notice warning-soft">
+            <span class="material-symbols-outlined">block</span>
+            <div>
+              <strong>不发送给 AI</strong>
+              <p>原始 PDF 文件内容不会发送给模型；激活码过期后历史摘要立即删除。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="modal" data-modal="export">
+      <div class="modal-card narrow">
+        <div class="module-title">
+          <h3>生成 PDF 报告</h3>
+          <button class="icon-button" data-close-modal aria-label="关闭">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <p class="analysis-text">
+          PDF 将包含综合评分、评级、盈利质量、现金流质量、风险清单、关键指标、行业对比、模型调校说明和免责声明。
+        </p>
+        <div class="notice warning-soft">
+          <span class="material-symbols-outlined">schedule</span>
+          <p>报告生成后不会云端保存，请及时下载。下次进入无法重新下载该报告。</p>
+        </div>
+        <div class="notice info-soft">
+          <span class="material-symbols-outlined">delete_forever</span>
+          <p>原始 PDF 仅在服务器临时保留 1 天，用于解析、校对和异常排查，到期自动清理。</p>
+        </div>
+        <p class="field-hint" data-export-message>璇峰厛纭繚褰撳墠鍒嗘瀽缁撴灉宸茬敓鎴愩€?/p>
+        <div class="actions-line">
+          <button class="ghost-button" data-close-modal>返回</button>
+          <button class="btn primary" data-download-report>
+            <span class="material-symbols-outlined">download</span>
+            生成并下载 PDF
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="./app.js?v=15"></script>
+  </body>
+</html>
