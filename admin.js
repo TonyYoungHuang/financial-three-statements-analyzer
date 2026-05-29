@@ -1,4 +1,5 @@
 const ADMIN_TOKEN_KEY = "financialAnalyzer.adminToken";
+const API_BASE_PATH = window.location.pathname.startsWith("/financial/") ? "/financial" : "";
 
 const adminTokenInput = document.querySelector("#adminToken");
 const adminState = document.querySelector("[data-admin-state]");
@@ -22,7 +23,7 @@ async function adminApi(path, options = {}) {
     headers["Content-Type"] = "application/json";
   }
 
-  const response = await fetch(path, {
+  const response = await fetch(apiPath(path), {
     method: options.method || "GET",
     headers,
     body: options.body ? JSON.stringify(options.body) : undefined,
@@ -40,6 +41,12 @@ async function adminApi(path, options = {}) {
   }
 
   return payload;
+}
+
+function apiPath(path) {
+  if (/^https?:\/\//i.test(path)) return path;
+  if (path.startsWith("/api/")) return `${API_BASE_PATH}${path}`;
+  return path;
 }
 
 async function loadAdminData() {

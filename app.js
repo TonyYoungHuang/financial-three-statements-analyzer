@@ -7,6 +7,7 @@ const screenTitles = {
 
 const SESSION_TOKEN_KEY = "financialAnalyzer.sessionToken";
 const ACTIVATION_KEY = "financialAnalyzer.activation";
+const API_BASE_PATH = window.location.pathname.startsWith("/financial/") ? "/financial" : "";
 const MODEL_REPORT_NOTE =
   "备注：本报告的自动化解读能力接入 DeepSeek V4 大模型，并结合专业财务分析人员的测试、校准与规则调整生成。报告内容仅基于用户上传并确认的财务报表数据、系统计算指标及风险识别规则，用于辅助理解企业财务状况、盈利质量、现金流表现和潜在风险，不构成投资建议、买卖建议、授信建议、审计意见或任何形式的决策结论。";
 
@@ -73,7 +74,7 @@ async function api(path, options = {}) {
     }
   }
 
-  const response = await fetch(path, {
+  const response = await fetch(apiPath(path), {
     method: options.method || "GET",
     headers,
     body: options.body ? JSON.stringify(options.body) : undefined,
@@ -88,6 +89,12 @@ async function api(path, options = {}) {
   }
 
   return payload;
+}
+
+function apiPath(path) {
+  if (/^https?:\/\//i.test(path)) return path;
+  if (path.startsWith("/api/")) return `${API_BASE_PATH}${path}`;
+  return path;
 }
 
 async function createAnalysisJob() {
@@ -594,7 +601,7 @@ async function downloadReportPdf() {
     await loadAnalysisResult(currentAnalysisJob.id);
   }
 
-  const response = await fetch(`/api/analysis/jobs/${currentAnalysisJob.id}/report.pdf`, {
+  const response = await fetch(apiPath(`/api/analysis/jobs/${currentAnalysisJob.id}/report.pdf`), {
     headers: {
       Authorization: `Bearer ${localStorage.getItem(SESSION_TOKEN_KEY) || ""}`,
     },
