@@ -13,7 +13,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = dirname(__dirname);
 const PORT = Number(process.env.PORT || 4173);
 const SESSION_WINDOW_MINUTES = Number(process.env.SESSION_WINDOW_MINUTES || 30);
-const ADMIN_TOKEN = process.env.ADMIN_TOKEN || "dev-admin-token";
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN || (process.env.NODE_ENV === "production" ? "" : "dev-admin-token");
 const UPLOAD_ROOT = join(rootDir, "data", "uploads");
 const MAX_UPLOAD_BYTES = Number(process.env.MAX_UPLOAD_BYTES || 25 * 1024 * 1024);
 const SOURCE_PDF_RETENTION_HOURS = Number(process.env.SOURCE_PDF_RETENTION_HOURS || 24);

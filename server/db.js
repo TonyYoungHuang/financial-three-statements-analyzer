@@ -254,6 +254,8 @@ function mergeSystemConfig(key, defaults, preferDefaults = false) {
 }
 
 function seedActivationCodes() {
+  if (process.env.NODE_ENV === "production" && process.env.SEED_DEMO_DATA !== "true") return;
+
   const count = db.prepare("SELECT COUNT(*) AS count FROM activation_codes").get().count;
   if (count > 0) return;
 
@@ -268,6 +270,8 @@ function seedActivationCodes() {
 }
 
 function seedProjects() {
+  if (process.env.NODE_ENV === "production" && process.env.SEED_DEMO_DATA !== "true") return;
+
   const activeCode = db.prepare("SELECT id FROM activation_codes WHERE code = ?").get("FIN-2026-A8K2-MPWA");
   if (!activeCode) return;
 
